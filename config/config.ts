@@ -335,4 +335,6 @@ export default defineConfig({
   },
   exportStatic: {},
   esbuild: {},
+  base: '/msdemo/',
+  publicPath: '/msdemo/',
 });
