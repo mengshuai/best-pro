@@ -8,14 +8,14 @@
 export default {
   dev: {
     '/api/': {
-      target: 'https://preview.pro.ant.design',
+      target: 'http://qqzj.info',
       changeOrigin: true,
       pathRewrite: { '^': '' },
     },
   },
   test: {
     '/api/': {
-      target: 'https://preview.pro.ant.design',
+      target: 'http://qqzj.info',
       changeOrigin: true,
       pathRewrite: { '^': '' },
     },

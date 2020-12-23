@@ -17,55 +17,27 @@ async function getFakeCaptcha(req: Request, res: Response) {
 export default {
   // 支持值为 Object 和 Array
   'GET /api/currentUser': {
-    name: 'Serati Ma',
-    avatar: 'https://gw.alipayobjects.com/zos/antfincdn/XAosXuNZyF/BiazfanxmamNRoxxVxka.png',
-    userid: '00000001',
-    email: 'antdesign@alipay.com',
-    signature: '海纳百川，有容乃大',
-    title: '交互专家',
-    group: '蚂蚁集团－某某某事业群－某某平台部－某某技术部－UED',
-    tags: [
-      {
-        key: '0',
-        label: '很有想法的',
-      },
-      {
-        key: '1',
-        label: '专注设计',
-      },
-      {
-        key: '2',
-        label: '辣~',
-      },
-      {
-        key: '3',
-        label: '大长腿',
-      },
-      {
-        key: '4',
-        label: '川妹子',
-      },
-      {
-        key: '5',
-        label: '海纳百川',
-      },
-    ],
-    notifyCount: 12,
-    unreadCount: 11,
-    country: 'China',
-    geographic: {
-      province: {
-        label: '浙江省',
-        key: '330000',
-      },
-      city: {
-        label: '杭州市',
-        key: '330100',
-      },
+    code: 0,
+    message: '登录成功',
+    data: {
+      github_id: '',
+      name: 'ms1',
+      type: 1,
+      phone: '',
+      img_url: '',
+      email: 'ms1@163.com',
+      introduce: '',
+      avatar: 'user',
+      location: 'user',
+      password: '8257b8ca5ce4ecc0d41ea5827c5602f6',
+      _id: '5fe2115cf906bf17ca00b8f7',
+      create_time: '2020-12-22T15:31:40.759Z',
+      update_time: '2020-12-22T15:31:40.759Z',
+      id: 2,
+      __v: 0,
     },
-    address: '西湖区工专路 77 号',
-    phone: '0752-268888888',
   },
+
   // GET POST 可省略
   'GET /api/users': [
     {
@@ -87,37 +59,26 @@ export default {
       address: 'Sidney No. 1 Lake Park',
     },
   ],
-  'POST /api/login/account': async (req: Request, res: Response) => {
-    const { password, userName, type } = req.body;
+  'POST /api/login': async (req: Request, res: Response) => {
+    const { password, email } = req.body;
     await waitTime(2000);
-    if (password === 'ant.design' && userName === 'admin') {
+    if (password === 'ant.design' && email === 'admin@163.com') {
       res.send({
-        status: 'ok',
-        type,
+        code: 0,
         currentAuthority: 'admin',
       });
       return;
     }
-    if (password === 'ant.design' && userName === 'user') {
+    if (password === 'ant.design' && email === 'user@163.com') {
       res.send({
         status: 'ok',
-        type,
         currentAuthority: 'user',
-      });
-      return;
-    }
-    if (type === 'mobile') {
-      res.send({
-        status: 'ok',
-        type,
-        currentAuthority: 'admin',
       });
       return;
     }
 
     res.send({
       status: 'error',
-      type,
       currentAuthority: 'guest',
     });
   },
