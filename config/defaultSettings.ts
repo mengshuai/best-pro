@@ -16,6 +16,9 @@ const proSettings: DefaultSettings = {
   title: 'Ant Design Pro',
   pwa: false,
   iconfontUrl: '',
+  menu: {
+    locale: false, //关闭国际化
+  },
 };
 
 export type { DefaultSettings };
