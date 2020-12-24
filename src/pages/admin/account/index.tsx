@@ -41,7 +41,6 @@ const handleUpdate = async (fields: FormValueType) => {
     await updateUser({
       name: fields.name,
       desc: fields.desc,
-      key: fields.key,
     });
     hide();
 
@@ -61,7 +60,7 @@ const handleUpdate = async (fields: FormValueType) => {
 const handleRemove = async (user: TableListItem) => {
   const hide = message.loading('正在删除');
   const { _id } = user;
-  if (user) return true;
+  if (!_id) return true;
   try {
     await delUser({
       id: _id,

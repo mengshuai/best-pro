@@ -104,14 +104,20 @@ export default {
     if (password === 'ant.design' && email === 'admin@163.com') {
       res.send({
         code: 0,
-        currentAuthority: 'admin',
+        data: {
+          status: 'ok',
+          currentAuthority: 'admin',
+        },
       });
       return;
     }
     if (password === 'ant.design' && email === 'user@163.com') {
       res.send({
-        status: 'ok',
-        currentAuthority: 'user',
+        code: 0,
+        data: {
+          status: 'ok',
+          currentAuthority: 'user',
+        },
       });
       return;
     }

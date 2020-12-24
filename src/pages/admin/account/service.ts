@@ -12,7 +12,6 @@ export async function delUser(params: { id: string }) {
     method: 'POST',
     data: {
       ...params,
-      method: 'delete',
     },
   });
 }
@@ -22,7 +21,6 @@ export async function addUser(params: TableListItem) {
     method: 'POST',
     data: {
       ...params,
-      method: 'post',
     },
   });
 }
