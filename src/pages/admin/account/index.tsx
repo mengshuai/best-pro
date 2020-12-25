@@ -36,12 +36,9 @@ const handleAdd = async (fields: TableListItem) => {
  * @param fields
  */
 const handleUpdate = async (fields: FormValueType) => {
-  const hide = message.loading('正在配置');
+  const hide = message.loading('正在更新');
   try {
-    await updateUser({
-      name: fields.name,
-      desc: fields.desc,
-    });
+    await updateUser(fields);
     hide();
 
     message.success('配置成功');
@@ -227,7 +224,7 @@ const TableList: React.FC = () => {
         <ProFormTextArea width="md" name="desc" />
       </ModalForm>
       <UpdateForm
-        onSubmit={async (value) => {
+        onSubmit={async (value: any) => {
           const success = await handleUpdate(value);
           if (success) {
             handleUpdateModalVisible(false);
