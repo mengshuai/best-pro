@@ -128,7 +128,7 @@ export default {
     });
   },
   'POST /api/register': (req: Request, res: Response) => {
-    res.send({ status: 'ok', currentAuthority: 'user' });
+    res.send({ code: 0, data: { currentAuthority: 'user' }, message: '注册成功' });
   },
   'GET /api/500': (req: Request, res: Response) => {
     res.status(500).send({

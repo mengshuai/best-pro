@@ -5,6 +5,7 @@ import { fakeRegister } from './service';
 export interface StateType {
   status?: 'ok' | 'error';
   currentAuthority?: 'user' | 'guest' | 'admin';
+  message?: string;
 }
 
 export interface ModelType {
@@ -39,7 +40,9 @@ const Model: ModelType = {
     registerHandle(state, { payload }) {
       return {
         ...state,
-        status: payload.status,
+        status: payload.code === 0 ? 'ok' : 'error',
+        message: payload.message,
+        currentAuthority: 'user',
       };
     },
   },

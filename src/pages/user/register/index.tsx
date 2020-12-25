@@ -1,6 +1,6 @@
 import { Form, Button, Input, Popover, Progress, message } from 'antd';
 import React, { FC, useState, useEffect } from 'react';
-import { Link, connect, history, FormattedMessage, formatMessage, Dispatch } from 'umi';
+import { Link, connect, history, FormattedMessage, Dispatch } from 'umi';
 
 import { StateType } from './model';
 import styles from './style.less';
@@ -8,21 +8,9 @@ import styles from './style.less';
 const FormItem = Form.Item;
 
 const passwordStatusMap = {
-  ok: (
-    <div className={styles.success}>
-      <FormattedMessage id="userandregister.strength.strong" />
-    </div>
-  ),
-  pass: (
-    <div className={styles.warning}>
-      <FormattedMessage id="userandregister.strength.medium" />
-    </div>
-  ),
-  poor: (
-    <div className={styles.error}>
-      <FormattedMessage id="userandregister.strength.short" />
-    </div>
-  ),
+  ok: <div className={styles.success}>强度：强</div>,
+  pass: <div className={styles.warning}>强度：中</div>,
+  poor: <div className={styles.error}>强度：太短</div>,
 };
 
 const passwordProgressMap: {
@@ -42,17 +30,15 @@ interface RegisterProps {
 }
 
 export interface UserRegisterParams {
-  mail: string;
+  email: string;
   password: string;
   confirm: string;
   mobile: string;
   captcha: string;
-  prefix: string;
 }
 
 const Register: FC<RegisterProps> = ({ submitting, dispatch, userAndregister }) => {
   const [visible, setvisible]: [boolean, any] = useState(false);
-  const [prefix]: [string, any] = useState('86');
   const [popover, setpopover]: [boolean, any] = useState(false);
   const confirmDirty = false;
   let interval: number | undefined;
@@ -61,7 +47,7 @@ const Register: FC<RegisterProps> = ({ submitting, dispatch, userAndregister }) 
     if (!userAndregister) {
       return;
     }
-    const account = form.getFieldValue('mail');
+    const account = form.getFieldValue('email');
     if (userAndregister.status === 'ok') {
       message.success('注册成功！');
       history.push({
@@ -70,6 +56,8 @@ const Register: FC<RegisterProps> = ({ submitting, dispatch, userAndregister }) 
           account,
         },
       });
+    } else {
+      message.success(userAndregister.message || '注册失败！');
     }
   }, [userAndregister]);
   useEffect(
@@ -94,14 +82,13 @@ const Register: FC<RegisterProps> = ({ submitting, dispatch, userAndregister }) 
       type: 'userAndregister/submit',
       payload: {
         ...values,
-        prefix,
       },
     });
   };
   const checkConfirm = (_: any, value: string) => {
     const promise = Promise;
     if (value && value !== form.getFieldValue('password')) {
-      return promise.reject(formatMessage({ id: 'userandregister.password.twice' }));
+      return promise.reject('两次输入的密码不匹配!');
     }
     return promise.resolve();
   };
@@ -110,7 +97,7 @@ const Register: FC<RegisterProps> = ({ submitting, dispatch, userAndregister }) 
     // 没有值的情况
     if (!value) {
       setvisible(!!value);
-      return promise.reject(formatMessage({ id: 'userandregister.password.required' }));
+      return promise.reject('请输入密码！');
     }
     // 有值的情况
     if (!visible) {
@@ -144,27 +131,33 @@ const Register: FC<RegisterProps> = ({ submitting, dispatch, userAndregister }) 
 
   return (
     <div className={styles.main}>
-      <h3>
-        <FormattedMessage id="userandregister.register.register" />
-      </h3>
+      <h3>注册</h3>
       <Form form={form} name="UserRegister" onFinish={onFinish}>
         <FormItem
-          name="mail"
+          name="name"
           rules={[
             {
               required: true,
-              message: formatMessage({ id: 'userandregister.email.required' }),
-            },
-            {
-              type: 'email',
-              message: formatMessage({ id: 'userandregister.email.wrong-format' }),
+              message: '请输入用户名',
             },
           ]}
         >
-          <Input
-            size="large"
-            placeholder={formatMessage({ id: 'userandregister.email.placeholder' })}
-          />
+          <Input size="large" placeholder="用户名" />
+        </FormItem>
+        <FormItem
+          name="email"
+          rules={[
+            {
+              required: true,
+              message: '请输入邮箱地址',
+            },
+            {
+              type: 'email',
+              message: '邮箱地址格式错误！',
+            },
+          ]}
+        >
+          <Input size="large" placeholder="邮箱" />
         </FormItem>
         <Popover
           getPopupContainer={(node) => {
@@ -201,11 +194,7 @@ const Register: FC<RegisterProps> = ({ submitting, dispatch, userAndregister }) 
               },
             ]}
           >
-            <Input
-              size="large"
-              type="password"
-              placeholder={formatMessage({ id: 'userandregister.password.placeholder' })}
-            />
+            <Input size="large" type="password" placeholder="至少6位密码，区分大小写" />
           </FormItem>
         </Popover>
         <FormItem
@@ -213,18 +202,14 @@ const Register: FC<RegisterProps> = ({ submitting, dispatch, userAndregister }) 
           rules={[
             {
               required: true,
-              message: formatMessage({ id: 'userandregister.confirm-password.required' }),
+              message: '请确认密码！',
             },
             {
               validator: checkConfirm,
             },
           ]}
         >
-          <Input
-            size="large"
-            type="password"
-            placeholder={formatMessage({ id: 'userandregister.confirm-password.placeholder' })}
-          />
+          <Input size="large" type="password" placeholder="确认密码" />
         </FormItem>
 
         <FormItem>
@@ -235,10 +220,10 @@ const Register: FC<RegisterProps> = ({ submitting, dispatch, userAndregister }) 
             type="primary"
             htmlType="submit"
           >
-            <FormattedMessage id="userandregister.register.register" />
+            注册
           </Button>
           <Link className={styles.login} to="/user/login">
-            <FormattedMessage id="userandregister.register.sign-in" />
+            使用已有账户登录
           </Link>
         </FormItem>
       </Form>
