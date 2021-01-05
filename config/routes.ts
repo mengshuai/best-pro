@@ -47,13 +47,6 @@
                 authority: ['admin'],
                 routes: [
                   {
-                    path: '/admin/sub-page',
-                    name: '用户管理111',
-                    icon: 'smile',
-                    component: './admin/index',
-                    authority: ['admin', 'user'],
-                  },
-                  {
                     path: '/admin/account',
                     name: '用户管理',
                     icon: 'smile',

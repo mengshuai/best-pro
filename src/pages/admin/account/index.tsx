@@ -180,9 +180,12 @@ const TableList: React.FC = () => {
         request={(params, sorter, filter) =>
           getUserList({ ...params, sorter, filter }).then((resp) => {
             const { total, list, current, pageSize } = resp.data || {};
+
             return {
               total,
-              data: list,
+              data: list.map((item: TableListItem) => {
+                return { ...item, key: item.id };
+              }),
               current,
               pageSize,
             };

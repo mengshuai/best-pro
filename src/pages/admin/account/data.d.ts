@@ -5,6 +5,8 @@ export type TableListItem = {
   desc: introduce;
   _id: string;
   create_time: Date;
+  id: string;
+  key: string;
 };
 
 export type TableListPagination = {
