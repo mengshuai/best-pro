@@ -68,8 +68,8 @@ class BaseView extends Component<BaseViewProps> {
   handleFinish = (data: any) => {
     const { currentUser, dispatch } = this.props;
     dispatch({
-      type: 'accountAndsettings/fetchCurrent',
-      payload: { ...currentUser, ...data },
+      type: 'accountAndsettings/fetchUpdateUser',
+      payload: { ...data, id: currentUser?._id },
     })
       .then(() => {
         message.success('更新基本信息成功');

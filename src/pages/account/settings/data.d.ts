@@ -41,4 +41,5 @@ export interface CurrentUser {
   address: string;
   phone: string;
   id: string;
+  _id: string;
 }
