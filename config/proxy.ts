@@ -8,7 +8,7 @@
 export default {
   dev: {
     '/api/': {
-      target: 'http://qqzj.info',
+      target: 'http://www.qqzj.info',
       changeOrigin: true,
       pathRewrite: { '^': '' },
     },

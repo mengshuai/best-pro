@@ -62,6 +62,29 @@
                 component: './ListTableList',
               },
               {
+                name: '个人页',
+                icon: 'user',
+                path: '/account',
+                routes: [
+                  {
+                    path: '/',
+                    redirect: '/account/center',
+                  },
+                  {
+                    name: '个人中心',
+                    icon: 'smile',
+                    path: '/account/center',
+                    component: './account/center',
+                  },
+                  {
+                    name: '个人设置',
+                    icon: 'smile',
+                    path: '/account/settings',
+                    component: './account/settings',
+                  },
+                ],
+              },
+              {
                 component: './404',
               },
             ],

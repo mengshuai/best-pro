@@ -23,17 +23,18 @@ export default {
       github_id: '',
       name: 'ms1',
       type: 1,
-      phone: '',
+      phone: '86-18611112222',
       img_url: '',
       email: 'ms1@163.com',
-      introduce: '',
-      avatar: 'user',
+      introduce: '用户介绍',
+      avatar: 'https://gw.alipayobjects.com/zos/antfincdn/XAosXuNZyF/BiazfanxmamNRoxxVxka.png',
       location: 'user',
       password: '8257b8ca5ce4ecc0d41ea5827c5602f6',
       _id: '5fe2115cf906bf17ca00b8f7',
       create_time: '2020-12-22T15:31:40.759Z',
       update_time: '2020-12-22T15:31:40.759Z',
-      id: 2,
+      id: '5fe2115cf906bf17ca00b8f7',
+      userid: '5fe2115cf906bf17ca00b8f7',
       currentAuthority: 'admin',
     },
   },
@@ -105,7 +106,6 @@ export default {
   },
   'POST /api/login': async (req: Request, res: Response) => {
     const { password, email } = req.body;
-    await waitTime(2000);
     if (password === 'ant.design' && email === 'admin@163.com') {
       res.send({
         code: 0,
