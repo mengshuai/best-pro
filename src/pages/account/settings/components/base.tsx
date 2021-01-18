@@ -1,6 +1,6 @@
 import { UploadOutlined } from '@ant-design/icons';
 import { Button, Input, Upload, Form, message } from 'antd';
-import { connect, FormattedMessage, Dispatch } from 'umi';
+import { connect, Dispatch } from 'umi';
 import React, { Component } from 'react';
 
 import { CurrentUser } from '../data.d';
@@ -10,9 +10,7 @@ import styles from './BaseView.less';
 // 头像组件 方便以后独立，增加裁剪之类的功能
 const AvatarView = ({ avatar }: { avatar: string }) => (
   <>
-    <div className={styles.avatar_title}>
-      <FormattedMessage id="accountandsettings.basic.avatar" defaultMessage="Avatar" />
-    </div>
+    <div className={styles.avatar_title}>头像</div>
     <div className={styles.avatar}>
       <img src={avatar} alt="avatar" />
     </div>
@@ -20,10 +18,7 @@ const AvatarView = ({ avatar }: { avatar: string }) => (
       <div className={styles.button_view}>
         <Button>
           <UploadOutlined />
-          <FormattedMessage
-            id="accountandsettings.basic.change-avatar"
-            defaultMessage="Change avatar"
-          />
+          更换头像
         </Button>
       </div>
     </Upload>

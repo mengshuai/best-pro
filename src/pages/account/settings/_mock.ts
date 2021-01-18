@@ -1,15 +1,6 @@
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { Request, Response } from 'express';
-import city from './geographic/city.json';
-import province from './geographic/province.json';
 
-function getProvince(_: Request, res: Response) {
-  return res.json(province);
-}
-
-function getCity(req: Request, res: Response) {
-  return res.json(city[req.params.province]);
-}
 // 代码中会兼容本地 service mock 以及部署站点的静态数据
 export default {
   // 支持值为 Object 和 Array
@@ -66,6 +57,4 @@ export default {
   'POST /api/updateUser': (req: Request, res: Response) => {
     res.send({ code: 0, data: { currentAuthority: 'user' }, message: '更新成功' });
   },
-  'GET  /api/geographic/province': getProvince,
-  'GET  /api/geographic/city/:province': getCity,
 };
