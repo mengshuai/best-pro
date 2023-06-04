@@ -88,6 +88,6 @@ export default defineConfig({
     babelPlugins: [],
     babelOptions: {},
   },
-  base: '/msdemo/',
-  publicPath: '/msdemo/',
+  base: '/',
+  publicPath: '/',
 });
